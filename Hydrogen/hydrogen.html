@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <title>Hydrogen Atom</title>
+  <link rel="stylesheet" href="./hydrogen.css" />
+</head>
+
+<body>
+  <div id="top-banner">Atom Simulator</div>
+  <div id="periodic-table-wrapper">
+    <div id="periodic-table-scroll">
+      <div id="periodic-table"></div>
+    </div>
+  </div>
+  <!-- Legend -->
+  <div id="legend">
+    <div id="legend-title">Legend</div>
+    <div class="legend-item">
+      <div class="dot dot-valence"></div>
+      <div>Valence electrons</div>
+    </div>
+
+    <div class="legend-item">
+      <div class="dot dot-inner"></div>
+      <div>Inner electrons</div>
+    </div>
+  </div>
+  <div id="element-info"></div>
+  <div id="footer">Atom Simulator © 2026
+    <img width="55" height="15"
+    src="https://visitor-badge.laobi.icu/badge?page_id=atom-simulator"
+    alt="Visitor Count"
+  />
+  </div>
+
+  <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.158.0/build/three.module.js"
+        }
+      }
+    </script>
+
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>

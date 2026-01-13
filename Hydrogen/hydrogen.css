@@ -1,0 +1,290 @@
+/* ================= GLOBAL ================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ================= THREE.JS CANVAS ================= */
+
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ================= ELEMENT INFO PANEL ================= */
+
+#element-info {
+  position: fixed;
+  top: 64px;
+  right: 16px;
+
+  width: 240px;
+  padding: 14px 16px;
+
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+
+  backdrop-filter: blur(6px);
+
+  font-size: 13px;
+  line-height: 1.45;
+
+  z-index: 60; /* ABOVE EVERYTHING */
+}
+
+/* Mobile info panel */
+@media (max-width: 768px) {
+  #element-info {
+    width: 90vw;
+    right: 5vw;
+    top: 12px;
+    font-size: 15px;
+  }
+}
+
+/* ================= PERIODIC TABLE WRAPPER ================= */
+
+#periodic-table-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  padding: 10px 0;
+
+  z-index: 50;
+
+  overflow: visible; /* 🔑 allows tooltips to escape */
+}
+
+/* ================= SCROLL CONTAINER ================= */
+
+#periodic-table-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ================= PERIODIC TABLE GRID ================= */
+
+#periodic-table {
+  display: grid;
+  grid-template-columns: repeat(18, 36px);
+  gap: 6px;
+
+  width: max-content;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* ================= ELEMENT CELL ================= */
+
+.element {
+  width: 36px;
+  height: 36px;
+
+  background: #222;
+  color: #fff;
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+
+  transition: background 0.15s ease, filter 0.15s ease, transform 0.1s ease;
+}
+
+.element:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+.element.active {
+  background: #4fa3ff !important;
+  color: #000;
+}
+
+/* ================= BLOCK COLORS ================= */
+
+.element.s {
+  background: #2c4f91;
+}
+.element.p {
+  background: #2f7d4a;
+}
+.element.d {
+  background: #7a4a1e;
+}
+.element.f {
+  background: #6b2c6b;
+}
+
+/* ================= NOBLE GASES ================= */
+
+.element.noble {
+  background: #6a5acd !important;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ================= SYMBOL & ATOMIC NUMBER ================= */
+
+.element .symbol {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.element .atomic-number {
+  font-size: 10px;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* ================= TOOLTIP ================= */
+
+.element::after {
+  content: attr(data-name);
+
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.96);
+
+  background: rgba(0, 0, 0, 0.9);
+  color: rgba(255, 255, 255, 0.85);
+
+  padding: 4px 8px;
+  border-radius: 6px;
+
+  font-size: 12px;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.1s ease, transform 0.1s ease;
+  z-index: 999; /* ABOVE TABLE */
+}
+
+.element:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ================= MOBILE ADJUSTMENTS ================= */
+
+@media (max-width: 768px) {
+  #periodic-table {
+    gap: 8px;
+  }
+
+  .element {
+    width: 42px;
+    height: 42px;
+  }
+
+  .element .symbol {
+    font-size: 16px;
+  }
+
+  .element .atomic-number {
+    font-size: 11px;
+  }
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  background: black;
+}
+
+/* Top banner */
+#top-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+
+#legend {
+  position: fixed;
+  top: 64px; /* below top banner */
+  left: 16px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  line-height: 1.6;
+}
+
+#legend-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-valence {
+  background: #ffbb09;
+  box-shadow: 0 0 6px #00aaff;
+}
+
+.dot-inner {
+  background: #66ccff;
+  opacity: 0.6;
+}
+ #footer {
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 12px;
+  z-index: 999;
+}
